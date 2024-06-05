@@ -3,8 +3,8 @@
 const { QueryTypes } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  const profesor = sequelize.define(
-    "profesor",
+  const usuario = sequelize.define(
+    "usuario",
     {
       id: {
         allowNull: false,
@@ -16,32 +16,41 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING(50),
       },
-      biografia: {
+      correo: {
         allowNull: false,
         type: DataTypes.TEXT,
       },
+      password: {
+        allowNull: false,
+        type: DataTypes.TEXT,
+      },
+      tipo: {
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
+      informacion_contacto: {
+        type: DataTypes.JSONB, 
+      }
     },
     {
       timestamps: false,
-      tableName: "profesores",
+      tableName: "usuarios",
     }
   );
 
-  profesor.getProfesores = async (params) => {
-    
+  usuario.getUsuarios = async (params) => {
     const query = ``;
     return await sequelize.query(query, {
       type: sequelize.QueryTypes.SELECT,
     });
   };
 
-  profesor.associate = function (models) {
-    // profesor.hasMany(models.materias, {
-    //   foreignKey: "fk_materia",
-    //   as: "materias",
+  usuario.associate = function (models) {
+    // usuario.hasMany(models.usuarios, {
+    //   foreignKey: "fk_usuario",
+    //   as: "usuarios",
     // });
   };
 
-  return profesor;
+  return usuario;
 };
-
